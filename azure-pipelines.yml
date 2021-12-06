@@ -5,5 +5,7 @@ stages:
         pool:
           vmImage: 'ubuntu-latest'
         steps:
+          - template: templates/npm-steps.yml
+        steps:
           - script: ./gradlew build
             name: build
