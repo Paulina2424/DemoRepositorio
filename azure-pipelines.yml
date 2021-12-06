@@ -1,19 +1,9 @@
-trigger:
-- main
-
-resources:
-- repo: self
-
-variables:
-  tag: '$(Build.BuildId)'
-
 stages:
-- stage: Build
-  jobs:
-  - job: Build
-    pool:
-      vmImage: ubuntu-latest
-    steps:
-     - script: ./gradlew build
-       name: build
-
+  - stage: Build
+    jobs:
+      - job: BuildMS
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - script: ./gradlew build
+            name: build
