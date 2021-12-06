@@ -6,6 +6,6 @@ stages:
           vmImage: 'ubuntu-latest'
         steps:
           - script: chmod 777 gradlew
-            name: build
+            name: permisos
           - script: ./gradlew build
             name: build
