@@ -5,5 +5,7 @@ stages:
         pool:
           vmImage: 'ubuntu-latest'
         steps:
+          - script: chmod 777 gradlew
+            name: build
           - script: ./gradlew build
             name: build
