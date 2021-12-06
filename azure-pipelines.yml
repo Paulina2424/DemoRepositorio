@@ -5,8 +5,5 @@ stages:
         pool:
           vmImage: 'ubuntu-latest'
         steps:
-          - template: ci/build-all-steps.yml
-            parameters:
-              os: Linux
           - script: ./gradlew build
             name: build
