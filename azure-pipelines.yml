@@ -14,7 +14,7 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-     - sccript: ./gradlew build
+     - script: ./gradlew build
        name: build
 
 steps:
