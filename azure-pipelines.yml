@@ -19,18 +19,8 @@ stages:
           vmImage: 'ubuntu-latest'
         steps:
           - task: Docker@2
-            displayName: Build
+            displayName: Build an image
             inputs:
+              repository: $(imageName)
               command: build
-              containerRegistry: dockerRegistryServiceConnection1
-              repository: contosoRepository
-              tags: latest
-              arguments: --label buildtype=nightly
-
-          - task: Docker@2
-            displayName: Push
-            inputs:
-              command: push
-              containerRegistry: dockerRegistryServiceConnection1
-              repository: contosoRepository
-              tags: latest
+              Dockerfile: app/Dockerfile
