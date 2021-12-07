@@ -12,10 +12,10 @@ stages:
             name: permisos
           - script: ./gradlew build
             name: build
-          - task: CopyFiles@2
+          - task: PublishBuildArtifacts@1
             inputs:
-              contents: '_buildOutput/**'
-              targetFolder: $(Build.ArtifactStagingDirectory)
+              pathToPublish: $(Build.ArtifactStagingDirectory)
+              artifactName: MyBuildOutputs 
   - stage:
     jobs:
       - job: Docker
@@ -28,7 +28,8 @@ stages:
               repository: $(imageName)
               command: build
               Dockerfile: Dockerfile
-          - task: PublishBuildArtifacts@1
+          - task: CopyFiles@2
             inputs:
-              pathToPublish: $(Build.ArtifactStagingDirectory)
-              artifactName: MyBuildOutputs
+              contents: '_buildOutput/**'
+              targetFolder: $(Build.ArtifactStagingDirectory)
+
