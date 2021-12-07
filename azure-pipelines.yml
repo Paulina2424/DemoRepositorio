@@ -13,5 +13,5 @@ stages:
             displayName: version
             inputs:
               repository: $(imageName)
-              command: docker --version
+              command: version
               Dockerfile: app/Dockerfile
