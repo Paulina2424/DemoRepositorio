@@ -1,3 +1,5 @@
+variables:
+  imageName: 'pipelines-javascript-docker'
 stages:
   - stage: Build
     jobs:
@@ -9,11 +11,10 @@ stages:
             name: permisos
           - script: ./gradlew build
             name: build
-  - stage:
-        - task: Docker@2
-          displayName: Build an image
-          inputs:
-            repository: $(imageName)
-            command: build
-            Dockerfile: app/Dockerfile
-       
+    - stage:
+      - task: Docker@2
+        displayName: Build an image
+        inputs:
+          repository: $(imageName)
+          command: build
+          Dockerfile: app/Dockerfile
