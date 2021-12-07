@@ -9,3 +9,9 @@ stages:
             name: permisos
           - script: ./gradlew build
             name: build
+          - task: Docker@2
+            displayName: Build an image
+            inputs:
+              repository: $(imageName)
+              command: build
+              Dockerfile: app/Dockerfile
