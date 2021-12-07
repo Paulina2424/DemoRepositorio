@@ -9,7 +9,7 @@ stages:
             name: permisos
           - script: ./gradlew build
             name: build
-  - stage: Docker image
+  - stage: Docker
     displayName: Build and push stage
     jobs:  
     - job: Build
