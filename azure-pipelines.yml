@@ -1,8 +1,4 @@
-pool:
-  vmImage: 'ubuntu-latest'
-variables:
-  imageName: 'pipelines-javascript-docker'
-  DOCKER_BUILDKIT: 1
+
 stages:
   - stage: Build
     jobs:
@@ -14,11 +10,15 @@ stages:
             name: permisos
           - script: ./gradlew build
             name: build
-  - stage: 
-      steps:
-              - task: Docker@2
-                displayName: Build an image
-                inputs:
-                  repository: $(imageName)
-                  command: build
-                  Dockerfile: app/Dockerfile
+  - stage:
+    jobs:
+      - job: Docker
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+           - task: Docker@2
+             displayName: Build an image
+             inputs:
+               repository: $(imageName)
+               command: build
+               Dockerfile: app/Dockerfile
