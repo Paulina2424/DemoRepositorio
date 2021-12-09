@@ -44,5 +44,7 @@ stages:
               command: buildAndPush
               repository: $(imageName)
               dockerfile: Dockerfile
+              tags: |
+                $(Build.BuildNumber)
              
        
