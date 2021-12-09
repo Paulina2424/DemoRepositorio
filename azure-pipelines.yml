@@ -18,9 +18,9 @@ stages:
               contents: 'scripts/**'
               targetFolder: '$(Build.ArtifactStagingDirectory)'
 
-         - publish: '$(Build.ArtifactStagingDirectory)/scripts'
-           displayName: 'Publish script'
-           artifact: drop
+          - publish: '$(Build.ArtifactStagingDirectory)/scripts'
+            displayName: 'Publish script'
+            artifact: drop
   - stage:
     jobs:
       - job: Docker
