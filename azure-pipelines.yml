@@ -44,6 +44,5 @@ stages:
               command: buildAndPush
               repository: $(imageName)
               dockerfile: Dockerfile
-              tags: |
-                 $(tag)
+             
        
