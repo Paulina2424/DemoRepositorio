@@ -39,8 +39,8 @@ stages:
               repository: $(imageName)
               command: build
               Dockerfile: Dockerfile
-         - download: current
-           artifact: '$(ARTIFACT_NAME)'
-         - task: PowerShell@2
-           inputs:
+          - download: current
+            artifact: '$(ARTIFACT_NAME)'
+          - task: PowerShell@2
+            inputs:
              filePath: '$(Pipeline.Workspace)\drop\test.ps1'
