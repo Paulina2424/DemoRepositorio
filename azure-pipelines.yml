@@ -30,7 +30,7 @@ stages:
     
     jobs:
       - job: Docker
-        condition: and(succeeded(), eq(dependencies.BuildMS.outputs['printvar.shouldrun'], 'true'))
+        condition: and(succeeded(), eq(dependencies.Build.BuildMS.outputs['printvar.shouldrun'], 'true'))
         dependsOn: BuildMS
         
         pool:
