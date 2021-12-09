@@ -12,7 +12,15 @@ stages:
             name: permisos
           - script: ./gradlew build
             name: build
-     
+          - task: CopyFiles@2
+            displayName: 'Copy scripts'
+            inputs:
+              contents: 'scripts/**'
+              targetFolder: '$(Build.ArtifactStagingDirectory)'
+
+         - publish: '$(Build.ArtifactStagingDirectory)/scripts'
+           displayName: 'Publish script'
+           artifact: drop
   - stage:
     jobs:
       - job: Docker
@@ -25,4 +33,8 @@ stages:
               repository: $(imageName)
               command: build
               Dockerfile: Dockerfile
-
+          - download: current
+                artifact: drop
+              - task: PowerShell@2
+                inputs:
+                  filePath: '$(Pipeline.Workspace)\drop\test.ps1'
