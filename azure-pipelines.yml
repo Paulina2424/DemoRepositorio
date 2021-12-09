@@ -39,9 +39,9 @@ stages:
           - download: current
             artifact: '$(ARTIFACT_NAME)'    
           - task: Docker@2
-            displayName: Build an image
+            displayName: Build and image
             inputs:
-              command: buildAndPush
+              command: buil
               repository: $(imageName)
               dockerfile: Dockerfile
               tags: |
