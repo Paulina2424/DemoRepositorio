@@ -18,8 +18,8 @@ stages:
               SourceFolder: '$(system.defaultworkingdirectory)'
               contents: '**/*.jar'
               targetFolder: '$(Build.ArtifactStagingDirectory)'
-         - task:  PublishBuildArtifacts@1
-           inputs:
+          - task:  PublishBuildArtifacts@1
+            inputs:
              pathPublish: '$(Build.ArtifactStagingDirectory)/scripts'
              displayName: 'Publish script'
              artifact: '$(ARTIFACT_NAME)'  
