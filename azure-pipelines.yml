@@ -12,6 +12,19 @@ stages:
             name: permisos
           - script: ./gradlew build
             name: build
+          - task: CopyFiles@2
+            displayName: 'Copy scripts'
+            inputs:
+              SourceFolder:'$(system.defaultworkingdirectory)'
+              contents: '**/*.jar'
+              targetFolder: '$(Build.ArtifactStagingDirectory)'
+         - task:  PublishBuildArtifacts@1
+           inputs:
+             pathPublish: '$(Build.ArtifactStagingDirectory)/scripts'
+             displayName: 'Publish script'
+             artifact: '$(ARTIFACT_NAME)'  
+             publishLocation: 'Container'
+             storeAsTar: true
       
   - stage:
     jobs:
