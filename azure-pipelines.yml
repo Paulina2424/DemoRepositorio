@@ -22,11 +22,12 @@ stages:
             inputs:
              pathPublish: '$(Build.ArtifactStagingDirectory)/scripts'
              displayName: 'Publish script'
-             artifact: '$(ARTIFACT_NAME)'  
+             artifactName: '$(ARTIFACT_NAME)'  
              publishLocation: 'Container'
              storeAsTar: true
       
   - stage:
+    dependsOn: Build
     jobs:
       - job: Docker
         pool:
@@ -38,4 +39,8 @@ stages:
               repository: $(imageName)
               command: build
               Dockerfile: Dockerfile
-        
+         - download: current
+           artifact: '$(ARTIFACT_NAME)'
+         - task: PowerShell@2
+           inputs:
+             filePath: '$(Pipeline.Workspace)\drop\test.ps1'
