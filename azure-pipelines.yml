@@ -27,12 +27,10 @@ stages:
              storeAsTar: true
       
   - stage:
-    
+    dependsOn: Build
     jobs:
       - job: Docker
         condition: and(succeeded(), eq(dependencies.Build.BuildMS.outputs['printvar.shouldrun'], 'true'))
-        dependsOn: BuildMS
-        
         pool:
           vmImage: 'ubuntu-latest'
         steps:
