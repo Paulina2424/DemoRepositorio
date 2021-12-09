@@ -21,7 +21,6 @@ stages:
           - task:  PublishBuildArtifacts@1
             inputs:
              pathPublish: '$(Build.ArtifactStagingDirectory)/scripts'
-             displayName: 'Publish script'
              artifactName: '$(ARTIFACT_NAME)'  
              publishLocation: 'Container'
              storeAsTar: true
@@ -33,6 +32,10 @@ stages:
         pool:
           vmImage: 'ubuntu-latest'
         steps:
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              downloadPath: '$(System.ArtifactsDirectory)'
+              
           - task: Docker@2
             displayName: Build an image
             inputs:
@@ -41,6 +44,4 @@ stages:
               Dockerfile: Dockerfile
           - download: current
             artifact: '$(ARTIFACT_NAME)'
-          - task: PowerShell@2
-            inputs:
-             filePath: '$(Pipeline.Workspace)\drop\test.ps1'
+       
