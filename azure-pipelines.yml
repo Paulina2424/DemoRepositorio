@@ -39,7 +39,7 @@ stages:
               artifactName: 'drop' 
           - script: ls -l 
           - script: docker --version
-          - script: docker build -f Dockerfile -t proj:myapp .
+          - script: docker build -f Dockerfile -t proj:demo .
           - task: Docker@2
             displayName: Build and image
             inputs:
