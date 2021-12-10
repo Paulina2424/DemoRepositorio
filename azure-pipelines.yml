@@ -34,7 +34,7 @@ stages:
           - task: DownloadBuildArtifacts@0
             inputs:
               downloadPath: '$(System.ArtifactsDirectory)'
-              artifactName: '$(Artifact_NAme)'
+              artifactName:
           - script: ls -l $(System.ArtifactsDirectory)"
           
           - task: Docker@2
