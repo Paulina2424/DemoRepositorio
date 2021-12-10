@@ -2,7 +2,7 @@
 variables:
   imageName: 'pipelines-javascript-docker'
   system.debug: true
-  containerRegistryServiceConnection: 52a2a707-31b4-4869-9965-b92ac32f703b
+  containerRegistryServiceConnection: d72e9478-3bde-48a3-b12c-f3820fe45b77
   imageRepository: foobar/content-trust
   tag: test
 stages:
