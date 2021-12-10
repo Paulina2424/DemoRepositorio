@@ -1,6 +1,10 @@
 
 variables:
   imageName: 'pipelines-javascript-docker'
+  system.debug: true
+  containerRegistryServiceConnection: serviceConnectionName
+  imageRepository: foobar/content-trust
+  tag: test
 stages:
   - stage: Build
     jobs:
@@ -32,30 +36,37 @@ stages:
         pool:
           vmImage: 'ubuntu-latest'
         steps:
-          - task: DownloadBuildArtifacts@0
-            inputs:
-              downloadPath: '$(System.ArtifactsDirectory)'
-              artifactName: 'drop' 
-          - script: ls -l $(System.ArtifactsDirectory)
-          - script: ls -l $(Build.ArtifactStagingDirectory)
-          - task: Docker@2
-            displayName: Push image
-            inputs:
-              containerRegistry: |
-                $(dockerHub)
-              repository: $(imageName)
-              command: push
-              tags: |
-                test1
-                test2
-          - task: Docker@2
-            displayName: Build and image
-            inputs:
-              repository: '$(Build.ArtifactStagingDirectory)'
-              contents: '**/*.jar'
-              command: buildAndPush
-              dockerfile: Dockerfile
-              tags: |
-                $(Build.BuildNumber)
-         
+        - task: Docker@2
+          inputs:
+            command: login
+            containerRegistry: $(containerRegistryServiceConnection)
+
+        - task: DownloadSecureFile@1
+          name: privateKey
+          inputs:
+            secureFile: cc8f3c6f998bee63fefaaabc5a2202eab06867b83f491813326481f56a95466f.key
+        - script: |
+            mkdir -p $(DOCKER_CONFIG)/trust/private
+            cp $(privateKey.secureFilePath) $(DOCKER_CONFIG)/trust/private
+
+        - task: Docker@2
+          inputs:
+            command: build
+            Dockerfile: '**/Dockerfile'
+            containerRegistry: $(containerRegistryServiceConnection)
+            repository: $(imageRepository)
+            tags: |
+              $(tag)
+            arguments: '--disable-content-trust=false'
+
+        - task: Docker@2
+          inputs: 
+            command: push
+            containerRegistry: $(containerRegistryServiceConnection)
+            repository: $(imageRepository)
+            tags: |
+              $(tag)
+            arguments: '--disable-content-trust=false'
+          env:
+            DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE: $(DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE)
        
