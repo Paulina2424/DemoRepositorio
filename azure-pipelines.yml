@@ -1,10 +1,7 @@
 
 variables:
   imageName: 'pipelines-javascript-docker'
-  system.debug: true
-  containerRegistryServiceConnection: d72e9478-3bde-48a3-b12c-f3820fe45b77
-  imageRepository: foobar/content-trust
-  tag: test
+
 stages:
   - stage: Build
     jobs:
@@ -36,31 +33,18 @@ stages:
         pool:
           vmImage: 'ubuntu-latest'
         steps:
-        - task: Docker@2
+      - task: DownloadBuildArtifacts@0
           inputs:
-            command: login
-            containerRegistry: $(containerRegistryServiceConnection)
-
-        
-
-        - task: Docker@2
-          inputs:
-            command: build
-            Dockerfile: '**/Dockerfile'
-            containerRegistry: $(containerRegistryServiceConnection)
-            repository: $(imageRepository)
+            downloadPath: '$(System.ArtifactsDirectory)'
+            artifactName: 'drop' 
+      - script: ls -l $(System.ArtifactsDirectory)
+      - script: ls -l $(Build.ArtifactStagingDirectory)
+      - task: Docker@2
+        displayName: Build and image
+        inputs:
+            repository: '$(Build.ArtifactStagingDirectory)'
+            contents: '**/*.jar'
+            command: 'buildAndPush'
+            dockerfile: Dockerfile
             tags: |
-              $(tag)
-            arguments: '--disable-content-trust=false'
-
-        - task: Docker@2
-          inputs: 
-            command: push
-            containerRegistry: $(containerRegistryServiceConnection)
-            repository: $(imageRepository)
-            tags: |
-              $(tag)
-            arguments: '--disable-content-trust=false'
-          env:
-            DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE: $(DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE)
-       
+              $(Build.BuildNumber)
