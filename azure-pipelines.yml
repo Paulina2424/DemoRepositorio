@@ -37,16 +37,16 @@ stages:
             inputs:
               downloadPath: '$(System.ArtifactsDirectory)'
               artifactName: 'drop' 
-          - script: ls -l $(System.ArtifactsDirectory)
-          
+          - script: ls -l 
+          - script: docker --version
           - task: Docker@2
             displayName: Build and image
             inputs:
-              command: push
+              command: build
               repository: '$(Build.ArtifactStagingDirectory)'
-              contents: '**/*.jar'
-              dockerfile: '**/Dockerfile'
-              arguments: '--disable-content-trust=false'
+              #contents: '**/*.jar'
+              dockerfile: 'Dockerfile'
+              
 
 
 
