@@ -44,5 +44,5 @@ stages:
               dockerfile: Dockerfile
               tags: |
                 $(Build.BuildNumber)
-         - script: echo "mostrar '$(System.ArtifactsDirectory)'"
+          - script: echo "mostrar '$(System.ArtifactsDirectory)'"
        
