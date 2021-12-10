@@ -40,7 +40,7 @@ stages:
           - script: ls -l 
           - script: docker images
          # - script: docker build -q -t prueba09:latest .
-          - script: docker build - < Dockerfile
+          - script: docker build prueba .
           - task: Docker@2
             displayName: Build and image
             inputs:
