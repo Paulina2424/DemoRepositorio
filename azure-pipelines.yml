@@ -36,7 +36,7 @@ stages:
             inputs:
               downloadPath: '$(System.ArtifactsDirectory)'
               artifactName: 'drop' 
-          - script: ls -l $(System.ArtifactsDirectory)"
+          - script: ls -l $(System.ArtifactsDirectory)
           
           - task: Docker@2
             displayName: Build and image
