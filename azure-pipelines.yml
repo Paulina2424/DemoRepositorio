@@ -43,6 +43,7 @@ stages:
             displayName: Build and image
             inputs:
               repository: '$(Build.ArtifactStagingDirectory)'
+              contents: '**/*.jar'
               command: build
               dockerfile: Dockerfile
               tags: |
