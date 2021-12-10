@@ -34,7 +34,7 @@ stages:
           vmImage: 'ubuntu-latest'
         steps:
       - task: DownloadBuildArtifacts@0
-          inputs:
+        inputs:
             downloadPath: '$(System.ArtifactsDirectory)'
             artifactName: 'drop' 
       - script: ls -l $(System.ArtifactsDirectory)
