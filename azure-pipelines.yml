@@ -46,6 +46,6 @@ stages:
                 repository: '$(Build.ArtifactStagingDirectory)'
                 contents: '**/*.jar'
                 dockerfile: Dockerfile
-                
+                arguments: '--disable-content-trust=false'
                 
               
