@@ -34,13 +34,15 @@ stages:
           - task: DownloadBuildArtifacts@0
             inputs:
               downloadPath: '$(System.ArtifactsDirectory)'
+          - script: echo "mostrar '$(System.ArtifactsDirectory)'"
+          
           - task: Docker@2
             displayName: Build and image
             inputs:
-              command: build
               repository: $(imageName)
+              command: build
               dockerfile: Dockerfile
               tags: |
                 $(Build.BuildNumber)
-             
+         - script: echo "mostrar '$(System.ArtifactsDirectory)'"
        
