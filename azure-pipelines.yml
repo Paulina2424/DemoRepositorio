@@ -39,6 +39,7 @@ stages:
               artifactName: 'drop' 
           - script: ls -l 
           - script: docker --version
+          - script: docker build
           - task: Docker@2
             displayName: Build and image
             inputs:
@@ -47,6 +48,5 @@ stages:
               #contents: '**/*.jar'
               dockerfile: 'Dockerfile'
               
-
 
 
