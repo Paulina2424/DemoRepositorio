@@ -42,7 +42,7 @@ stages:
           - task: Docker@2
             displayName: Build and image
             inputs:
-                command: buildAndPush
+                command: push
                 repository: '$(Build.ArtifactStagingDirectory)/scripts'
                 #contents: '**/*.jar'
                 dockerfile: Dockerfile
