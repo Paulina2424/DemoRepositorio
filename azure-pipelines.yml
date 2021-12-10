@@ -33,18 +33,18 @@ stages:
         pool:
           vmImage: 'ubuntu-latest'
         steps:
-      - task: DownloadBuildArtifacts@0
-        inputs:
-            downloadPath: '$(System.ArtifactsDirectory)'
-            artifactName: 'drop' 
-      - script: ls -l $(System.ArtifactsDirectory)
-      - script: ls -l $(Build.ArtifactStagingDirectory)
-      - task: Docker@2
-        displayName: Build and image
-        inputs:
-            repository: '$(Build.ArtifactStagingDirectory)'
-            contents: '**/*.jar'
-            command: 'buildAndPush'
-            dockerfile: Dockerfile
-            tags: |
-              $(Build.BuildNumber)
+          - task: DownloadBuildArtifacts@0
+            inputs:
+                downloadPath: '$(System.ArtifactsDirectory)'
+                artifactName: 'drop' 
+          - script: ls -l $(System.ArtifactsDirectory)
+          - script: ls -l $(Build.ArtifactStagingDirectory)
+          - task: Docker@2
+            displayName: Build and image
+            inputs:
+                repository: '$(Build.ArtifactStagingDirectory)'
+                contents: '**/*.jar'
+                command: 'buildAndPush'
+                dockerfile: Dockerfile
+                tags: |
+                  $(Build.BuildNumber)
