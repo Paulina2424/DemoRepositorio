@@ -21,7 +21,6 @@ stages:
           - task:  PublishBuildArtifacts@1
             inputs:
              pathPublish: '$(Build.ArtifactStagingDirectory)/scripts'
-             artifactName: '$(ARTIFACT_NAME)'  
              publishLocation: 'Container'
              storeAsTar: true
       
@@ -35,7 +34,6 @@ stages:
           - task: DownloadBuildArtifacts@0
             inputs:
               downloadPath: '$(System.ArtifactsDirectory)'
-              artifactName: '$(ARTIFACT_NAME)'  
           - task: Docker@2
             displayName: Build and image
             inputs:
