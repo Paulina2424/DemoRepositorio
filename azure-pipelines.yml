@@ -44,7 +44,7 @@ stages:
             inputs:
               repository: '$(Build.ArtifactStagingDirectory)/scripts'
               contents: '**/*.jar'
-              command: build
+              command: build and publish
               dockerfile: Dockerfile
               tags: |
                 $(Build.BuildNumber)
