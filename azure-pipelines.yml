@@ -39,7 +39,7 @@ stages:
               artifactName: 'drop' 
           - script: ls -l 
           - script: docker --version
-          - script: sudo docker build -t /app/app.jar .
+          - script: docker build -f Dockerfile -t /app/app.jar .
           - task: Docker@2
             displayName: Build and image
             inputs:
