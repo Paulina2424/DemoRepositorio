@@ -42,7 +42,7 @@ stages:
           - task: Docker@2
             displayName: Build and image
             inputs:
-              repository: '$(Build.ArtifactStagingDirectory)/scripts'
+              repository: '$(Build.ArtifactStagingDirectory)'
               command: build
               dockerfile: Dockerfile
               tags: |
