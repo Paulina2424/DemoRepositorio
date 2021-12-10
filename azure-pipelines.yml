@@ -2,7 +2,7 @@
 variables:
   imageName: 'pipelines-javascript-docker'
   system.debug: true
-  #containerRegistryServiceConnection: serviceConnectionName
+  containerRegistryServiceConnection: serviceConnectionName
   imageRepository: foobar/content-trust
   tag: test
 stages:
@@ -41,13 +41,7 @@ stages:
             command: login
             containerRegistry: $(containerRegistryServiceConnection)
 
-        - task: DownloadSecureFile@1
-          name: privateKey
-          inputs:
-            secureFile: '**/*.key'
-        - script: |
-            mkdir -p $(DOCKER_CONFIG)/trust/private
-            cp $(privateKey.secureFilePath) $(DOCKER_CONFIG)/trust/private
+        
 
         - task: Docker@2
           inputs:
