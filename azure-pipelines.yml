@@ -38,11 +38,20 @@ stages:
               artifactName: 'drop' 
           - script: ls -l $(System.ArtifactsDirectory)
           - script: ls -l $(Build.ArtifactStagingDirectory)
-          
+          - task: Docker@2
+            displayName: Push image
+            inputs:
+              containerRegistry: |
+                $(dockerHub)
+              repository: $(imageName)
+              command: push
+              tags: |
+                test1
+                test2
           - task: Docker@2
             displayName: Build and image
             inputs:
-              repository: '$(Build.ArtifactStagingDirectory)/scripts'
+              repository: '$(Build.ArtifactStagingDirectory)'
               contents: '**/*.jar'
               command: buildAndPush
               dockerfile: Dockerfile
