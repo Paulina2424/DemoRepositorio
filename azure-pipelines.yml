@@ -26,7 +26,7 @@ stages:
              publishLocation: 'Container'
              storeAsTar: true
       
-  - stage:
+  - stage:	
     dependsOn: Build
     jobs:
       - job: Docker
@@ -35,22 +35,18 @@ stages:
         steps:
           - task: DownloadBuildArtifacts@0
             inputs:
-                downloadPath: '$(System.ArtifactsDirectory)'
-                artifactName: 'drop' 
+              downloadPath: '$(System.ArtifactsDirectory)'
+              artifactName: 'drop' 
           - script: ls -l $(System.ArtifactsDirectory)
           - script: ls -l $(Build.ArtifactStagingDirectory)
           - task: Docker@2
+            displayName: Build and image
             inputs:
-              command: build
-              Dockerfile: '**/Dockerfile'
-              repository: '$(Build.ArtifactStagingDirectory)'
-
-              arguments: '--disable-content-trust=false'
-
-          - task: Docker@2
-            inputs: 
               command: push
               repository: '$(Build.ArtifactStagingDirectory)'
+              contents: '**/*.jar'
+              dockerfile: Dockerfile
               arguments: '--disable-content-trust=false'
+
 
 
