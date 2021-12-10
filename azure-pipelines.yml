@@ -2,7 +2,7 @@
 variables:
   imageName: 'pipelines-javascript-docker'
   system.debug: true
-  containerRegistryServiceConnection: serviceConnectionName
+  containerRegistryServiceConnection: github connection 1
   imageRepository: foobar/content-trust
   tag: test
 stages:
