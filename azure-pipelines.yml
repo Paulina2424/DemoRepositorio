@@ -43,7 +43,8 @@ stages:
             displayName: Build and image
             inputs:
                 repository: '$(Build.ArtifactStagingDirectory)/scripts'
-                contents: '**/*.jar'
-                command: 'buildAndPush'
+                #contents: '**/*.jar'
                 dockerfile: Dockerfile
+                command: 'buildAndPush'
+                
               
