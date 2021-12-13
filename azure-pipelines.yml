@@ -40,10 +40,11 @@ stages:
           - script: ls -l 
           - script: docker images
           - script: docker run -dp 8080:8060 node:12
+          - script: docker ps 
           - task: Docker@2
             displayName: Build and image
             inputs:
-              command: 'Build -t'
+              command: 'Build -f Dockerfile .'
               repository: '$(Build.ArtifactStagingDirectory)'
               #contents: '**/*.jar'
               dockerfile: Dockerfile
