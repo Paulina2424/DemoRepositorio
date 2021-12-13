@@ -37,14 +37,14 @@ stages:
             artifact: DemoRepositorio
           - script: |
               mkdir uncomprensse 
-              tar -xvf /home/vsts/work/1/DemoRepositorio/DemoRepositorio.tar -C ./uncomprensse 
+              tar -xvf $(Agent.BuildDirectory)/DemoRepositorio/DemoRepositorio.tar -C ./uncomprensse 
             name: 'descompresion'
             
          
           - script: ls -l  ./uncomprensse
           - script: docker build -t paulinagarate/demorepositorio . -f Dockerfile --build-arg PATH_FILE=./uncomprensse/build/libs/demo-0.0.1-SNAPSHOT.jar
-          #- script: docker run -dp 8080:8060 node:12
-          #- script: docker ps 
+          - script: docker images
+          
          
               
 
