@@ -35,7 +35,13 @@ stages:
         steps:
           - download: current
             artifact: DemoRepositorio
-          - script: ls -l 
+          - script: |
+              mkdir uncomprensse 
+              tar -xvf /home/vsts/work/1/DemoRepositorio/DemoRepositorio.tar -C ./uncomprensse 
+            name: 'descompresión'
+            
+         
+          - script: ls -l  ./uncomprensse
          # - script: docker images
           #- script: docker run -dp 8080:8060 node:12
           #- script: docker ps 
