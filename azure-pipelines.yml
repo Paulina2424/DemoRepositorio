@@ -38,7 +38,7 @@ stages:
           - script: |
               mkdir uncomprensse 
               tar -xvf /home/vsts/work/1/DemoRepositorio/DemoRepositorio.tar -C ./uncomprensse 
-            name: 'descompresión'
+            name: 'descompresion'
             
          
           - script: ls -l  ./uncomprensse
