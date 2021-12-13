@@ -39,7 +39,7 @@ stages:
               artifactName: 'drop' 
           - script: ls -l 
           - script: docker images
-          - script: docker build -t paulinagarate/prueba09
+          - script: docker build -t paulinagarate/prueba09 .
           - task: Docker@2
             displayName: Build and image
             inputs:
