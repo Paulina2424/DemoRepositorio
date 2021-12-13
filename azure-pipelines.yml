@@ -39,7 +39,7 @@ stages:
               artifactName: 'drop' 
           - script: ls -l 
           - script: docker images
-         # - script: docker build -q -t prueba09:latest .
+          - script: docker run -dp 8080:8060 getting-started
           - script: docker ps -a
           - task: Docker@2
             displayName: Build and image
