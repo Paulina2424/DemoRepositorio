@@ -43,7 +43,7 @@ stages:
           - task: Docker@2
             displayName: Build and image
             inputs:
-              command: docker build -t node:12 .
+              command: build .
               repository: '$(Build.ArtifactStagingDirectory)'
               #contents: '**/*.jar'
               dockerfile: 'Dockerfile'
