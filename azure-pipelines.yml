@@ -42,7 +42,7 @@ stages:
             
          
           - script: ls -l  ./uncomprensse
-         # - script: docker images
+          - script: docker build -t paulinagarate/DemoRepositorio . -f Dockerfile
           #- script: docker run -dp 8080:8060 node:12
           #- script: docker ps 
          
