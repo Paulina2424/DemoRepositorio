@@ -21,8 +21,8 @@ stages:
               targetFolder: '$(Build.ArtifactStagingDirectory)'
           - task:  PublishBuildArtifacts@1
             inputs:
-             pathPublish: '$(Build.ArtifactStagingDirectory)/scripts'
-             artifactName: 'drop' 
+             pathPublish: '$(Build.ArtifactStagingDirectory)'
+             artifactName: 'DemoRepositorio' 
              publishLocation: 'Container'
              storeAsTar: true
       
@@ -33,21 +33,13 @@ stages:
         pool:
           vmImage: 'ubuntu-latest'
         steps:
-          - task: DownloadBuildArtifacts@0
-            inputs:
-              downloadPath: '$(System.ArtifactsDirectory)'
-              artifactName: 'drop' 
+          - download: current
+            artifact: DemoRepositorio
           - script: ls -l 
-          - script: docker images
-          - script: docker run -dp 8080:8060 node:12
-          - script: docker ps 
-          - task: Docker@2
-            displayName: Build and image
-            inputs:
-              command: 'build -t node:latest . '
-              repository: '$(Build.ArtifactStagingDirectory)'
-              #contents: '**/*.jar'
-              dockerfile: Dockerfile
+         # - script: docker images
+          #- script: docker run -dp 8080:8060 node:12
+          #- script: docker ps 
+         
               
 
 
